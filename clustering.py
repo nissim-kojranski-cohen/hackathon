@@ -76,6 +76,9 @@ def get_arnona_stats(df_with_labels, df):
     arnona_stats = pd.concat([df_with_labels, df.iloc[:,7:]], axis=1).groupby('cluster').mean().iloc[:, -1]
     return arnona_stats
 
+#def export_to_csv(stats):
+#    stats.to_csv(f'{stats}')
+#    return f'{stats} has been created successfully!'
 
 def main():
     df_demographic = cleaning_data(csv)
@@ -90,6 +93,11 @@ def main():
     arnona_stats = get_arnona_stats(df_with_labels, df)
     electricity_stats = get_electricity_stats(df_with_labels, df)
     water_stats = get_water_stats(df_with_labels, df)
+
+    water_stats.to_csv('electricity_stats.csv')
+    electricity_stats.to_csv('water_stats.csv')
+    arnona_stats.to_csv('arnona_stats.csv')
+
 
 if __name__ == '__main__':
     main()
