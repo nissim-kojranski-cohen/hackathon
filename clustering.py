@@ -41,8 +41,8 @@ def concat_labels(labels, df_demographic):
     return df_with_labels
 
 
-def get_wcs(clustering):
-    return clustering.inertia_
+#def get_wcs(clustering):
+#    return clustering.inertia_
 
 
 def get_labels(clustering):
@@ -61,7 +61,7 @@ def main():
     clusters = clustering(pca_generated, c)
     labels = get_labels(clusters)
     df_with_labels = concat_labels(df_demographic, labels)
-    wcs = get_wcs(clustering)
+    #wcs = get_wcs(clustering)
     stats = get_cluster_stats(df_with_labels)
     print(df_with_labels)
 
