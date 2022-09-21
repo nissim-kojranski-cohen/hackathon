@@ -34,7 +34,7 @@ def test_predict_electricity():
     print(y_pred)
     return y_pred
 
-def predict_electricity():
+def predict_electricity(X_test):
     model = load(pickle_name)
 
     # X_test = pd.read_csv(X_test_file_name)

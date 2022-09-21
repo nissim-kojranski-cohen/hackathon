@@ -8,8 +8,7 @@ ordered_cols_test = ['month', 'age', 'children', 'employment', 'city_Herzliya',
        'city_Petah_Tikva', 'city_Ramat_Gan', 'city_Ramat_HaSharon',
        'city_Rishon_LeTsiyon', 'city_Tel_Aviv_Yaffo']
 
-pickle_name = 'water_model.pkl'
-X_test_file_name = 'X_test.csv'
+
 
 
 def one_hot_encode_city(df):
@@ -36,11 +35,18 @@ def test_predict_water():
     return y_pred
 
 def predict_water(X_test):
+
+    pickle_name = 'water_model.pkl'
+    X_test_file_name = 'X_test.csv'
+
     model = load(pickle_name)
+    print(model)
 
     # X_test = pd.read_csv(X_test_file_name)
     X_test = one_hot_encode_city(X_test)  # one hot encode the city
     X_test = X_test[ordered_cols_test]  # order columns according to fit
+
+    print(X_test)
 
     y_pred = model.predict(X_test)
     return y_pred
