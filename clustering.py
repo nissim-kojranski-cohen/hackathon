@@ -57,13 +57,15 @@ def get_cluster_stats(df_with_labels):
 def main():
     df_demographic = cleaning_data(csv)
     df_preprocessed = encoding_data(df_demographic)
-    pca_generation = pca_generation(df_preprocessed, k)
-    clustering = clustering(pca_generation, c)
+    pca_generated = pca_generation(df_preprocessed, k)
+    clustering = clustering(pca_generated, c)
     labels = get_labels(clustering)
     df_with_labels = concat_labels(df_demographic, labels)
     wcs = get_wcs(clustering)
     stats = get_cluster_stats(df_with_labels)
+    print(df_with_labels)
 
 
 if __name__ == '__main__':
     main()
+
