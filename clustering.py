@@ -4,7 +4,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.decomposition import PCA
 from sklearn.cluster import KMeans
 
-csv = '/Users/nelson/Repositories/hackathon/merged.csv'
+csv = 'merged.csv'
 
 k = 2
 c = 4
