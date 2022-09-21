@@ -9,6 +9,7 @@ from sklearn import ensemble, metrics
 from sklearn.linear_model import LinearRegression
 from joblib import dump, load
 
+
 # reads file
 electricity = pd.read_csv('electricity.csv')
 electricity = electricity.drop(columns=['Unnamed: 0'])
@@ -29,8 +30,6 @@ electricity = pd.melt(electricity,
 demographics = pd.read_csv('demographics.csv')
 demographics = demographics.drop(columns=['Unnamed: 0'])
 demographics = demographics[['name', 'birth_date', 'age', 'children', 'employment', 'id', 'city']]
-print(demographics.head())
-print('Shape of demographics:', demographics.shape)
 
 # Joins demographics with electricity
 electricity = pd.merge(electricity, demographics, how='inner', on='id')
@@ -78,10 +77,9 @@ y_pred = regr.predict(X_test)
 # print('R-Squared on test set:', regr.score(X_test, y_test))
 # print('The RMSE on the test set is:', metrics.mean_squared_error(y_test, y_pred) ** 0.5)
 
-
 # Since the Random Forest Regressor performs better, we will continue with it
 # export model to disk with pickle
-dump(regr, 'electricity_pred.pkl')
+dump(regr, 'electricity_model.pkl')
 
 
 
