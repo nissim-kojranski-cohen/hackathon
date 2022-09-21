@@ -4,7 +4,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.decomposition import PCA
 from sklearn.cluster import KMeans
 
-CSV = 'merged.csv'
+csv = 'merged.csv'
 k = 2
 c = 4
 
@@ -36,22 +36,33 @@ def clustering(pca_generation, c):
     return clustering
 
 
-def get_label(clustering):
-    return pd.DataFrame(clustering.labels_, columns=['clusters'])
-
-
-def concat_label(labels, df_demographic):
+def concat_labels(labels, df_demographic):
     df_with_labels = pd.concat([df_demographic, labels], axis=1)
     return df_with_labels
 
 
+def get_wcs(clustering):
+    return clustering.inertia_
+
+
+def get_labels(clustering):
+    return pd.DataFrame(clustering.labels_, columns=['cluster'])
+
+
+def get_cluster_stats(df_with_labels):
+    mean_ = df_with_labels.groupby(['cluster', 'city']).mean()
+    return mean_
+
+
 def main():
-    df_demographic = cleaning_data(CSV)
+    df_demographic = cleaning_data(csv)
     df_preprocessed = encoding_data(df_demographic)
     pca_generation = pca_generation(df_preprocessed, k)
     clustering = clustering(pca_generation, c)
-    labels = get_label(clustering)
-    df_with_labels = concat_label(df_demographic, labels)
+    labels = get_labels(clustering)
+    df_with_labels = concat_labels(df_demographic, labels)
+    wcs = get_wcs(clustering)
+    stats = get_cluster_stats(df_with_labels)
 
 
 if __name__ == '__main__':
