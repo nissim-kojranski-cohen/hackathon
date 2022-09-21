@@ -8,6 +8,8 @@ csv = 'merged.csv'
 k = 2
 c = 4
 
+df = pd.read_csv(csv)
+
 def cleaning_data(csv):
     df = pd.read_csv(csv)
     df_demographic = df.drop(columns=['name', 'birth_date', 'id']).iloc[:,0:4]
