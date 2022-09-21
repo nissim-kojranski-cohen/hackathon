@@ -8,18 +8,17 @@ csv = 'merged.csv'
 k = 2
 c = 4
 
-
 def cleaning_data(csv):
     df = pd.read_csv(csv)
-    df_demographic = df.drop(columns=['name', 'birth_date', 'id']).iloc[:, 0:4]
+    df_demographic = df.drop(columns=['name', 'birth_date', 'id']).iloc[:,0:4]
     return df_demographic
 
 
 def encoding_data(df_demographic):
     df_encoded = pd.get_dummies(df_demographic, columns=['children', 'city'])
-    df_scaled = pd.DataFrame(StandardScaler().fit_transform(df_demographic[['age']]), columns=['age'])
+    df_scaled = pd.DataFrame(StandardScaler().fit_transform(df_demographic[['age']]),columns=['age'])
     df_preprocessed = pd.concat([df_encoded, df_scaled], axis=1)
-    df_preprocessed = df_preprocessed.iloc[:, 1:]
+    df_preprocessed = df_preprocessed.iloc[: , 1:]
     return df_preprocessed
 
 
@@ -41,8 +40,8 @@ def concat_labels(labels, df_demographic):
     return df_with_labels
 
 
-#def get_wcs(clustering):
-#    return clustering.inertia_
+# def get_wcs(clustering):
+#     return clustering.inertia_
 
 
 def get_labels(clustering):
@@ -54,6 +53,12 @@ def get_cluster_stats(df_with_labels):
     return mean_
 
 
+def get_stats(df_with_labels, df):
+    demographic_stats = pd.concat([df_with_labels, df.iloc[:,7:]], axis=1).groupby('cluster').mean().iloc[:, :3]
+    bills_stats = pd.concat([df_with_labels, df.iloc[:,7:]], axis=1).groupby('cluster').mean().iloc[:, 3:]
+    return demographic_stats, bills_stats
+
+
 def main():
     df_demographic = cleaning_data(csv)
     df_preprocessed = encoding_data(df_demographic)
@@ -62,8 +67,8 @@ def main():
     labels = get_labels(clusters)
     df_with_labels = concat_labels(df_demographic, labels)
     #wcs = get_wcs(clustering)
-    stats = get_cluster_stats(df_with_labels)
-    print(df_with_labels)
+    demographic_stats, bills_stats = get_stats(df_with_labels, df)
+    print(bills_stats)
 
 
 if __name__ == '__main__':
