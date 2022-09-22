@@ -46,7 +46,7 @@ y_pred = regr.predict(X_test)
 # Since the Linear Regression Model performs better, we will continue with it
 
 # export model to disk with pickle
-dump(lr, 'water_model.pkl')
+dump(lr, 'arnona_model.pkl')
 
 
 
