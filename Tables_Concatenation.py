@@ -1,9 +1,9 @@
 import pandas as pd
 
-demographics = pd.read_csv('csvs\demographics.csv')
-electricity = pd.read_csv('csvs\electricity.csv')
-water = pd.read_csv('csvs\water.csv')
-arnona = pd.read_csv("csvs\\arnona.csv")
+demographics = pd.read_csv('./csvs/demographics.csv')
+electricity = pd.read_csv('./csvs/electricity.csv')
+water = pd.read_csv('./csvs/water.csv')
+arnona = pd.read_csv("./csvs/arnona.csv")
 
 months = ['January', 'February', 'March', 'April', 'May', 'June',
           'July', 'August', 'September', 'October', 'Novemeber','December']
@@ -38,5 +38,5 @@ if 'Unnamed: 0' in df_merged.columns:
 # In[7]:
 
 
-df_merged.to_csv('csvs\merged.csv', index=False)
+df_merged.to_csv('./csvs/merged.csv', index=False)
 

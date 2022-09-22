@@ -10,10 +10,10 @@ from joblib import dump, load
 
 
 # reads file
-arnona = pd.read_csv('csvs/arnona.csv')
+arnona = pd.read_csv('./csvs/arnona.csv')
 arnona = arnona.drop(columns=['Unnamed: 0', 'Signed_Up'])
 
-demographics = pd.read_csv('csvs/demographics.csv')
+demographics = pd.read_csv('./csvs/demographics.csv')
 demographics = demographics.drop(columns=['Unnamed: 0'])
 demographics = demographics[['name', 'birth_date', 'age', 'children', 'employment', 'id', 'city']]
 
@@ -46,4 +46,4 @@ y_pred = regr.predict(X_test)
 # Since the Linear Regression Model performs better, we will continue with it
 
 # export model to disk with pickle
-dump(lr, 'pkl/arnona_model.pkl')
+dump(lr, './pkl/arnona_model.pkl')

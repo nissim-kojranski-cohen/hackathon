@@ -10,7 +10,7 @@ ordered_cols_test = ['age', 'children', 'employment', 'city_Herzliya',
        'city_Petah_Tikva', 'city_Ramat_Gan', 'city_Ramat_HaSharon',
        'city_Rishon_LeTsiyon', 'city_Tel_Aviv_Yaffo']
 
-pickle_name = 'pkl/arnona_model.pkl'
+pickle_name = './pkl/arnona_model.pkl'
 
 
 def one_hot_encode_city(df):

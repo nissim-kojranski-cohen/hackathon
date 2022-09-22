@@ -6,7 +6,7 @@ from sklearn.cluster import KMeans
 from joblib import dump
 
 
-csv = 'csvs/merged.csv'
+csv = './csvs/merged.csv'
 
 k = 2
 c = 4
@@ -31,7 +31,7 @@ def encoding_data(df_demographic):
 def pca_generation(df_preprocessed, k):
     pca = PCA(n_components=k)
     H = pca.fit_transform(df_preprocessed)
-    dump(pca, 'pkl/pca_model.pkl')
+    dump(pca, './pkl/pca_model.pkl')
     H = pd.DataFrame(H)
     return H
 
@@ -39,7 +39,7 @@ def pca_generation(df_preprocessed, k):
 def clustering(pca_generation, c):
     clustering = KMeans(n_clusters=c, random_state=42)
     clustering.fit(pca_generation)
-    dump(clustering, 'pkl/clustering_model.pkl')
+    dump(clustering, './pkl/clustering_model.pkl')
     return clustering
 
 
@@ -104,9 +104,9 @@ def main():
     electricity_stats = get_electricity_stats(df_with_labels, df)
     water_stats = get_water_stats(df_with_labels, df)
 
-    water_stats.to_csv('stats/water_stats.csv')
-    electricity_stats.to_csv('stats/electricity_stats.csv')
-    arnona_stats.to_csv('stats/arnona_stats.csv')
+    water_stats.to_csv('./stats/water_stats.csv')
+    electricity_stats.to_csv('./stats/electricity_stats.csv')
+    arnona_stats.to_csv('./stats/arnona_stats.csv')
 
 
 main()

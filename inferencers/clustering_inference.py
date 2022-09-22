@@ -5,9 +5,8 @@ from sklearn.decomposition import PCA
 from sklearn.cluster import KMeans
 from joblib import load
 
-cls_pickle = 'pkl/clustering_model.pkl'
-pca_pickle = 'pkl/pca_model.pkl'
-X_test_file_name = 'X_test_cls.csv'
+cls_pickle = './pkl/clustering_model.pkl'
+pca_pickle = './pkl/pca_model.pkl'
 k = 2
 
 def one_hot_encode_city(df):
@@ -25,8 +24,6 @@ def one_hot_encode_city(df):
 
 model = load(cls_pickle)
 pca = load(pca_pickle)
-
-X_test = pd.read_csv(X_test_file_name)
 
 df_preprocessed = one_hot_encode_city(X_test)
 

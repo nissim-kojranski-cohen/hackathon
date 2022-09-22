@@ -21,7 +21,7 @@ def one_hot_encode_city(df):
 
 def predict_water(X_test):
     print(os.getcwd())
-    pickle_name = 'pkl/water_model.pkl'
+    pickle_name = './pkl/water_model.pkl'
 
     model = load(pickle_name)
 

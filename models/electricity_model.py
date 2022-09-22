@@ -11,7 +11,7 @@ from joblib import dump, load
 
 
 # reads file
-electricity = pd.read_csv('csvs/electricity.csv')
+electricity = pd.read_csv('./csvs/electricity.csv')
 electricity = electricity.drop(columns=['Unnamed: 0'])
 electricity = electricity[['name', 'id', 'January', 'February', 'March', 'April',
                            'May', 'June', 'July', 'August', 'September', 'October', 'Novemeber',
@@ -27,7 +27,7 @@ electricity = pd.melt(electricity,
                     var_name='month')
 
 # Reads demographics.csv
-demographics = pd.read_csv('csvs/demographics.csv')
+demographics = pd.read_csv('./csvs/demographics.csv')
 demographics = demographics.drop(columns=['Unnamed: 0'])
 demographics = demographics[['name', 'birth_date', 'age', 'children', 'employment', 'id', 'city']]
 
@@ -79,7 +79,7 @@ y_pred = regr.predict(X_test)
 
 # Since the Random Forest Regressor performs better, we will continue with it
 # export model to disk with pickle
-dump(regr, 'pkl/electricity_model.pkl')
+dump(regr, './pkl/electricity_model.pkl')
 
 
 

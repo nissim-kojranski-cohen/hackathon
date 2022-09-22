@@ -5,7 +5,7 @@ ordered_cols_test = ['month', 'age', 'children', 'employment', 'city_Herzliya',
        'city_Petah_Tikva', 'city_Ramat_Gan', 'city_Ramat_HaSharon',
        'city_Rishon_LeTsiyon', 'city_Tel_Aviv_Yaffo']
 
-pickle_name = 'pkl/electricity_model.pkl'
+pickle_name = './pkl/electricity_model.pkl'
 
 
 def one_hot_encode_city(df):
