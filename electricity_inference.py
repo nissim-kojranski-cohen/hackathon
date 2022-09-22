@@ -23,14 +23,27 @@ def one_hot_encode_city(df):
             df[add_col] = 0
     return df
 
-# with open(pickle_name, 'rb') as input_model:
-#     model = pickle.load(input_model)
+def test_predict_electricity():
+    model = load(pickle_name)
 
-model = load(pickle_name)
+    X_test = pd.read_csv(X_test_file_name)
+    X_test = one_hot_encode_city(X_test) # one hot encode the city
+    X_test = X_test[ordered_cols_test] # order columns according to fit
 
-X_test = pd.read_csv(X_test_file_name)
-X_test = one_hot_encode_city(X_test) # one hot encode the city
-X_test = X_test[ordered_cols_test] # order columns according to fit
+    y_pred = model.predict(X_test)
+    print(y_pred)
+    return y_pred
 
-y_pred = model.predict(X_test)
-print(y_pred)
+def predict_electricity(X_test):
+    model = load(pickle_name)
+
+    # X_test = pd.read_csv(X_test_file_name)
+    X_test = one_hot_encode_city(X_test)  # one hot encode the city
+    X_test = X_test[ordered_cols_test]  # order columns according to fit
+
+    y_pred = model.predict(X_test)
+    print(y_pred)
+    return y_pred
+
+if __name__ == '__main__':
+    pass
