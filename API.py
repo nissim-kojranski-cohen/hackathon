@@ -3,6 +3,8 @@ from arnona_inference import predict_arnona
 from electricity_inference import predict_electricity
 from water_inference import predict_water
 import pandas as pd
+
+import random
 import os
 
 
@@ -37,6 +39,7 @@ def infer_electricity():
     args = request.args
 
     X_input = {k: v for k, v in args.items()}
+    X_input['month'] = 9
     X = pd.DataFrame.from_dict(X_input, orient='index').T
 
     res = predict_electricity(X)
@@ -49,11 +52,23 @@ def infer_water():
     args = request.args
 
     X_input = {k: v for k, v in args.items()}
+    X_input['month'] = 9
     X = pd.DataFrame.from_dict(X_input, orient='index').T
 
     res = predict_water(X)
 
     return str(res[0])
+
+
+@app.route('/infer_cluster')
+def infer_cluster():
+    res = random.choice([0,1,2,3])
+    return str(res)
+
+
+@app.route('/home')
+def hello():
+    return 'CheckMyCheck ML Server\n\nmethods: {infer_water, infer_electricity, infer_arnona, infer_cluster}'
 
 
 if __name__ == '__main__':
