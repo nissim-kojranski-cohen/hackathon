@@ -1,38 +1,14 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# # - Tables Concatenation
-
-# In[1]:
-
-
 import pandas as pd
 
+demographics = pd.read_csv('csvs\demographics.csv')
+electricity = pd.read_csv('csvs\electricity.csv')
+water = pd.read_csv('csvs\water.csv')
+arnona = pd.read_csv("csvs\\arnona.csv")
 
-# In[2]:
-
-
-demographics = pd.read_csv('demographics.csv')
-electricity = pd.read_csv('electricity.csv')
-water = pd.read_csv('water.csv')
-arnona = pd.read_csv('arnona.csv')
-
-dataframes = [demographics, electricity, water, arnona]
-
-
-# In[3]:
-
-#
-# for df in dataframes:
-#     df = df.drop('Unnamed: 0', axis=1)
-
-
-# In[4]:
-
-
-# def add_prefix(df, )
 months = ['January', 'February', 'March', 'April', 'May', 'June',
           'July', 'August', 'September', 'October', 'Novemeber','December']
+
+
 prefixed_months_elec = ['Elec_'+month for month in months]
 prefixed_months_water = ['Water_'+month for month in months]
 
@@ -62,5 +38,5 @@ if 'Unnamed: 0' in df_merged.columns:
 # In[7]:
 
 
-df_merged.to_csv('merged.csv', index=False)
+df_merged.to_csv('csvs\merged.csv', index=False)
 

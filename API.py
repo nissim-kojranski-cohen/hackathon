@@ -1,7 +1,7 @@
 from flask import Flask, request
-from arnona_inference import predict_arnona
-from electricity_inference import predict_electricity
-from water_inference import predict_water
+from inferencers.arnona_inference import predict_arnona
+from inferencers.electricity_inference import predict_electricity
+from inferencers.water_inference import predict_water
 import pandas as pd
 
 import random
@@ -78,4 +78,4 @@ def hello():
 
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=8080)
+    app.run(host="0.0.0.0", port=80)
