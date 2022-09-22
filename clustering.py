@@ -20,7 +20,7 @@ def cleaning_data(csv):
 
 
 def encoding_data(df_demographic):
-    df_encoded = pd.get_dummies(df_demographic, columns=['children', 'city'])
+    df_encoded = pd.get_dummies(df_demographic, columns=['city'])
     df_scaled = pd.DataFrame(StandardScaler().fit_transform(df_demographic[['age']]), columns=['age'])
     df_preprocessed = pd.concat([df_encoded, df_scaled], axis=1)
     df_preprocessed = df_preprocessed.iloc[:, 1:]
@@ -30,14 +30,17 @@ def encoding_data(df_demographic):
 def pca_generation(df_preprocessed, k):
     pca = PCA(n_components=k)
     H = pca.fit_transform(df_preprocessed)
+    dump(pca, 'pkl/pca_model.pkl')
     H = pd.DataFrame(H)
     return H
+
 
 def clustering(pca_generation, c):
     clustering = KMeans(n_clusters=c, random_state=42)
     clustering.fit(pca_generation)
-    dump(clustering, 'clustering_model.pkl')
+    dump(clustering, 'pkl/clustering_model.pkl')
     return clustering
+
 
 #### Version without PCA
 # def clustering(df_preprocessed, c):
@@ -89,7 +92,7 @@ def main():
     clusters = clustering(pca_generated, c)
 
     #### Version without PCA
-    #clusters = clustering(df_preprocessed, c)
+    # clusters = clustering(df_preprocessed, c)
 
     labels = get_labels(clusters)
     df_with_labels = concat_labels(df_demographic, labels)
@@ -100,9 +103,9 @@ def main():
     electricity_stats = get_electricity_stats(df_with_labels, df)
     water_stats = get_water_stats(df_with_labels, df)
 
-    water_stats.to_csv('electricity_stats.csv')
-    electricity_stats.to_csv('water_stats.csv')
-    arnona_stats.to_csv('arnona_stats.csv')
+    water_stats.to_csv('stats/water_stats.csv')
+    electricity_stats.to_csv('stats/electricity_stats.csv')
+    arnona_stats.to_csv('stats/arnona_stats.csv')
 
 
 if __name__ == '__main__':
