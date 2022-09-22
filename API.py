@@ -6,7 +6,7 @@ import pandas as pd
 import os
 
 
-os.chdir(r'C:\Users\mfuser\jupyter_notebook\Side Pros\Hackaton\GIT')
+# os.chdir(r'C:\Users\mfuser\jupyter_notebook\Side Pros\Hackaton\GIT')
 
 app = Flask(__name__)
 
@@ -21,6 +21,10 @@ def infer_arnona():
     args = request.args
 
     X_input = {k: v for k, v in args.items()}
+
+    if 'month' in X_input:
+        del X_input['month']
+
     X = pd.DataFrame.from_dict(X_input, orient='index').T
 
     res = predict_arnona(X)
@@ -52,8 +56,5 @@ def infer_water():
     return str(res[0])
 
 
-
-
 if __name__ == '__main__':
-    # clf = get_model()
     app.run(host="0.0.0.0", port=80)

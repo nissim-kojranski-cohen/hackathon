@@ -37,7 +37,7 @@ def test_predict_arnona():
 
 
 def predict_arnona(X_test):
-    os.chdir(r'C:\Users\mfuser\jupyter_notebook\Side Pros\Hackaton\GIT')
+    # os.chdir(r'C:\Users\mfuser\jupyter_notebook\Side Pros\Hackaton\GIT')
     model = load(pickle_name)
     # X_test = pd.read_csv(X_test_file_name)
     X_test = one_hot_encode_city(X_test)  # one hot encode the city
