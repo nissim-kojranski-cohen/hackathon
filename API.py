@@ -12,6 +12,12 @@ import os
 
 app = Flask(__name__)
 
+def read_args(args):
+    X_input = {k: v for k, v in args.items()}
+    X_input['month'] = 9
+    if 'employment' in X_input:
+        X_input['employment'] = int(X_input['employment'])
+    return X_input
 
 @app.route('/help')
 def help():
@@ -22,7 +28,7 @@ def help():
 def infer_arnona():
     args = request.args
 
-    X_input = {k: v for k, v in args.items()}
+    X_input = read_args(args)
 
     if 'month' in X_input:
         del X_input['month']
@@ -38,8 +44,8 @@ def infer_arnona():
 def infer_electricity():
     args = request.args
 
-    X_input = {k: v for k, v in args.items()}
-    X_input['month'] = 9
+    X_input = read_args(args)
+
     X = pd.DataFrame.from_dict(X_input, orient='index').T
 
     res = predict_electricity(X)
@@ -51,8 +57,8 @@ def infer_electricity():
 def infer_water():
     args = request.args
 
-    X_input = {k: v for k, v in args.items()}
-    X_input['month'] = 9
+    X_input = read_args(args)
+
     X = pd.DataFrame.from_dict(X_input, orient='index').T
 
     res = predict_water(X)
@@ -66,7 +72,7 @@ def infer_cluster():
     return str(res)
 
 
-@app.route('/home')
+@app.route('/tutorial/')
 def hello():
     return 'CheckMyCheck ML Server\n\nmethods: {infer_water, infer_electricity, infer_arnona, infer_cluster}'
 
