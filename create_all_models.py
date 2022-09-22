@@ -1,7 +1,7 @@
-import arnona_model.py
-import water_model.py
-import electricity_model.py
-import clustering.py
+import arnona_model
+import water_model
+import electricity_model
+import clustering
 
 # import os.path
 #
